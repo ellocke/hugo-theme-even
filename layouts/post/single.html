@@ -14,15 +14,27 @@
           </div>
         {{- end }}
         {{- if .Site.Params.moreMeta }}
-          <span class="more-meta"> {{ T "wordCount" .WordCount }} </span>
-          <span class="more-meta"> {{ T "readingTime" .ReadingTime }} </span>
-        {{- end }}
-        {{ if and .Site.Params.busuanzi.enable .Site.Params.busuanzi.pagePV -}}
-          {{ $valueSpan := printf `<span id="busuanzi_value_page_pv"><img src="%s" alt="spinner.svg"/></span>` ("img/spinner.svg" | relURL) -}}
-          <span id="busuanzi_container_page_pv" class="more-meta"> {{ printf (T "pagePV") $valueSpan | safeHTML }} </span>
+        <!--
+        <span class="more-meta"> {{ T "wordCount" .WordCount }} </span>
+        <span class="more-meta"> {{ T "readingTime" .ReadingTime }} </span>-->
+            {{- if .Params.rmdlink }}
+              {{- if .Params.hardslug }}
+                <span class="more-meta"><a href="https://github.com/ellocke/GithubPage/blob/master/content/post/{{ .Params.hardslug }}.Rmd" target="_blank">&nbsp;<code>Rmd</code><span class="iconfont icon-github2">&nbsp;</span></a></span>
+                {{- else -}}
+                <span class="more-meta"><a href="https://github.com/ellocke/GithubPage/blob/master/content/post/{{ .Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}-{{ .Params.slug }}.Rmd" target="_blank">&nbsp;<code>Rmd&nbsp;<span class="iconfont icon-github2">&nbsp;</span></code></a></span>
+              {{- end }}
+            {{- end }}
         {{- end }}
       </div>
     </header>
+
+    <!-- Abstract -->
+    {{ if .Params.abstract -}}
+    <div class="abstract">
+      <h1>Abstract / TL;DR </h1>
+      <blockquote>{{ .Params.abstract }}</blockquote>
+    </div>
+    {{- end }}
 
     <!-- TOC -->
     {{- partial "post/toc.html" . -}}
@@ -35,37 +47,32 @@
       {{ .Content }}
     </div>
 
-    <!-- Copyright -->
-    {{- partial "post/copyright.html" . -}}
-
-    <!-- Reward -->
-    {{- partial "post/reward.html" . -}}
-
     <footer class="post-footer">
       {{ with .Params.tags -}}
-        <div class="post-tags">
+        <div class="post-tags"><strong># Tagged:&nbsp;</strong>
           {{ range . -}}
-            <a href="{{ "tags" | relLangURL }}/{{ . | urlize }}/">{{ . }}</a>
+          <a href="{{ "tags" | relLangURL }}/{{ . | urlize }}/">{{ . }}</a>
           {{ end -}}
         </div>
       {{- end -}}
 
       <!-- Post Pagination -->
       <nav class="post-nav">
-        {{ with .NextInSection -}}
+        {{ with .PrevInSection -}}
           <a class="prev" href="{{ .URL }}">
             <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">{{ .Title }}</span>
+            <span class="next-text nav-default">{{ .Title }}</span>
             <span class="prev-text nav-mobile">{{ T "prevPost" }}</span>
           </a>
         {{- end }}
-        {{ with .PrevInSection -}}
+        {{ with .NextInSection -}}
           <a class="next" href="{{ .URL }}">
-            <span class="next-text nav-default">{{ .Title }}</span>
-            <span class="next-text nav-mobile">{{ T "nextPost" }}</span>
+            <span class="prev-text nav-default">{{ .Title }}</span>
+            <span class="prev-text nav-mobile">{{ T "nextPost" }}</span>
             <i class="iconfont icon-right"></i>
           </a>
         {{- end }}
+
       </nav>
     </footer>
   </article>
