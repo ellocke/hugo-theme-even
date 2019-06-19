@@ -28,7 +28,7 @@
   }
 }
 
-@include max-screen() {
+@include mid-screen() {
   .site-navbar {
     display: none;
   }
