@@ -7,7 +7,7 @@
       {{ with .Params.categories -}}
         <div class="post-category">
           {{ range . -}}
-            <a href="{{ "categories" | relLangURL }}/{{ . | urlize }}/"> {{ . }} </a>
+          <span class="tag landing-page"><a href="{{ "categories" | relLangURL }}/{{ . | urlize }}/"> {{ . }} </a></span>
           {{ end -}}
         </div>
       {{- end }}
@@ -31,9 +31,10 @@
   <!-- custom Thumbnail ENDE -->
     <div class="post-summary">
       {{ .Description }}
+      <span class="read-more">
+        <a href="{{ .URL }}" class="read-more-link">{{ T "readMore" }}</a>
+      </span>
     </div>
-    <div class="read-more">
-      <a href="{{ .URL }}" class="read-more-link">{{ T "readMore" }}</a>
-    </div>
+
   </div>
 </article>
