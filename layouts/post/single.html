@@ -9,7 +9,7 @@
         {{ with .Params.categories -}}
           <div class="post-category">
             {{ range . -}}
-              <a href="{{ "categories" | relLangURL }}/{{ . | urlize }}/"> {{ . }} </a>
+              <span class="tag"><a href="{{ "categories" | relLangURL }}/{{ . | urlize }}/"> {{ . }} </a> </span>
             {{ end -}}
           </div>
         {{- end }}
@@ -18,11 +18,13 @@
         <span class="more-meta"> {{ T "wordCount" .WordCount }} </span>
         <span class="more-meta"> {{ T "readingTime" .ReadingTime }} </span>-->
             {{- if .Params.rmdlink }}
+            <div class="post-rmd-link">
               {{- if .Params.hardslug }}
                 <span class="more-meta"><a href="https://github.com/ellocke/GithubPage/blob/master/content/post/{{ .Params.hardslug }}.Rmd" target="_blank">&nbsp;<code>Rmd</code><span class="iconfont icon-github2">&nbsp;</span></a></span>
                 {{- else -}}
-                <span class="more-meta"><a href="https://github.com/ellocke/GithubPage/blob/master/content/post/{{ .Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}-{{ .Params.slug }}.Rmd" target="_blank">&nbsp;<code>Rmd&nbsp;<span class="iconfont icon-github2">&nbsp;</span></code></a></span>
+                <span class="more-meta rmd-link"><a href="https://github.com/ellocke/GithubPage/blob/master/content/post/{{ .Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}-{{ .Params.slug }}.Rmd" target="_blank">&nbsp;<code class="rmd-link">Rmd&nbsp;<span class="iconfont icon-github2">&nbsp;</span></code></a></span>
               {{- end }}
+            </div>
             {{- end }}
         {{- end }}
       </div>
