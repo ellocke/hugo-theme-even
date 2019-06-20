@@ -14,9 +14,11 @@
   {{ partial "head.html" . }}
 </head>
 <body onload = "iframeOn()">
+  {{ if .IsPage }}
   <div class="progress-bar-container">
     <div class="progress-bar" id="progress-bar"></div>
   </div>
+  {{ end }}
   {{ partial "slideout.html" . }}
   <div class="container" id="mobile-panel">
     {{ if not .Params.hideHeaderAndFooter -}}
