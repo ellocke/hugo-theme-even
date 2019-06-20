@@ -20,9 +20,9 @@
             {{- if .Params.rmdlink }}
             <div class="post-rmd-link">
               {{- if .Params.hardslug }}
-                <span class="more-meta rmd-link"><a href="https://github.com/ellocke/GithubPage/blob/master/content/post/{{ .Params.hardslug }}.Rmd" target="_blank">&nbsp;<code>Rmd</code><span class="iconfont icon-github2">&nbsp;</span></a></span>
+                <span class="more-meta rmd-link"><a href="https://github.com/ellocke/GithubPage/blob/master/content/post/{{ .Params.hardslug }}.Rmd" target="_blank">&nbsp;<code class="rmd-link">Rmd&nbsp;<span class="iconfont icon-github2">&nbsp;</span></a></code></span>
                 {{- else -}}
-                <span class="more-meta rmd-link"><a href="https://github.com/ellocke/GithubPage/blob/master/content/post/{{ .Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}-{{ .Params.slug }}.Rmd" target="_blank">&nbsp;<code class="rmd-link">Rmd&nbsp;<span class="iconfont icon-github2">&nbsp;</span></code></a></span>
+                <span class="more-meta rmd-link"><a href="https://github.com/ellocke/GithubPage/blob/master/content/post/{{ .Date.Format (.Site.Params.dateFormatToUse | default "2006-01-02") }}-{{ .Params.slug }}.Rmd" target="_blank">&nbsp;<code class="rmd-link">Rmd&nbsp;<span class="iconfont icon-github2">&nbsp;</span></a></code></span>
               {{- end }}
             </div>
             {{- end }}
